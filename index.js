@@ -23,18 +23,20 @@ client.once("ready", () => {
 client.on("message", message => {
     if (message.author.bot || message.channel.type == "dm") return;
 
-    if (message.content.startsWith("Привет")) {
+    var content = message.content.toLowerCase()
+
+    if (content.startsWith("привет")) {
         message.channel.send("https://neprivet.ru");
     };
 
-    if (message.content.startsWith("Можно вопрос")){
+    if (content.startsWith("можно вопрос")){
         message.channel.send("https://nometa.xyz");
     };
 
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+    const args = content.slice(prefix.length).split(/ +/);
+    const command = args.shift();
 
-    if (!message.content.startsWith(prefix)) return;
+    if (!content.startsWith(prefix)) return;
     if (!client.commands.has(command)) return;
 
     try {
